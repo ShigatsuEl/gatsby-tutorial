@@ -8,6 +8,11 @@ export default function BlogPost({ data }) {
     <Layout>
       <div>
         <h1>{post.frontmatter.title}</h1>
+        {post.frontmatter.attachments?.publicURL && (
+          <a href={post.frontmatter.attachments.publicURL} download>
+            {post.frontmatter.title}
+          </a>
+        )}
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>
     </Layout>
@@ -20,6 +25,9 @@ export const query = graphql`
       html
       frontmatter {
         title
+        attachments {
+          publicURL
+        }
       }
     }
   }
